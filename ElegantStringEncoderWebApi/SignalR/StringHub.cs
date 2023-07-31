@@ -23,11 +23,6 @@ public sealed class StringHub : Hub
         }
     }
 
-    public async Task Send(int arg1, string arg2, [SignalRHidden] CancellationToken ct = default)
-    {
-        await Clients.All.SendAsync("Receive", arg1.ToString(), arg2, ct);
-    }
-
     public override Task OnConnectedAsync()
     {
         return base.OnConnectedAsync();
