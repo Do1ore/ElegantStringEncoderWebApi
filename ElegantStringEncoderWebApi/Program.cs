@@ -1,4 +1,3 @@
-using ElegantStringEncoderWebApi;
 using ElegantStringEncoderWebApi.Extensions;
 using ElegantStringEncoderWebApi.Services;
 using ElegantStringEncoderWebApi.SignalR;
@@ -12,7 +11,7 @@ builder.Services.AddAndConfigureSwaggerGen();
 
 builder.Services.AddSignalR();
 builder.Services.AddTransient<IStringEncoder, StringEncoder>();
-
+builder.Services.ConfigureCorsPolicy();
 
 var app = builder.Build();
 
@@ -28,6 +27,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.UseCors("angular");
 app.MapHub<StringHub>("hub/encoder");
 app.Run();

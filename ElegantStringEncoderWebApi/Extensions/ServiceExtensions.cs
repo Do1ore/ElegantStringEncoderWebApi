@@ -12,4 +12,20 @@ public static class ServiceExtensions
             options.AddSignalRSwaggerGen();
         });
     }
+
+    public static void ConfigureCorsPolicy(this IServiceCollection services)
+    {
+        services.AddCors(setup =>
+        {
+            setup.AddPolicy("angular", builder =>
+            {
+                {
+                    builder.WithOrigins("http://localhost:4200")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials();
+                }
+            });
+        });
+    }
 }
