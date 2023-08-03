@@ -5,12 +5,15 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <UserSecretsId>6866b170-e7b3-48d3-8ec2-c72fc2d77aed</UserSecretsId>
+        <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.9" />
         <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.0-preview.6.23329.11" />
         <PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="8.0.0-preview.6.23329.11" />
+        <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.3" />
         <PackageReference Include="SignalRSwaggerGen" Version="4.4.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     </ItemGroup>
