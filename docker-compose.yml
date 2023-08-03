@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  elegantstringencoderwebapi:
+    image: ${DOCKER_REGISTRY-}elegantstringencoderwebapi:latest
+    build:
+      context: .
+      dockerfile: ElegantStringEncoderWebApi/Dockerfile
+    ports:
+     - "7286:80"
+    networks:
+     - hypelink
+    environment:
+     - ASPNETCORE_ENVIRONMENT=Development
+     - ASPNETCORE_URLS=https://+:80
+
+  angular-app:
+    image: ${DOCKER_REGISTRY-}angular-app:latest
+    ports:
+     - "4200:80"
+    depends_on:
+     - elegantstringencoderwebapi
+    networks:
+     - hypelink
+
+networks:
+    hypelink:
+       driver: bridge
