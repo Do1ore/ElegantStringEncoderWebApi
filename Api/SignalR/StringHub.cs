@@ -1,8 +1,8 @@
-using ElegantStringEncoderWebApi.Services;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.SignalR;
 using SignalRSwaggerGen.Attributes;
 
-namespace ElegantStringEncoderWebApi.SignalR;
+namespace Api.SignalR;
 
 [SignalRHub]
 public class StringHub : Hub

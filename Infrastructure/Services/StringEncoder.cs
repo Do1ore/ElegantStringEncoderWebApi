@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace ElegantStringEncoderWebApi.Services;
+namespace Infrastructure.Services;
 
 public class StringEncoder : IStringEncoder
 {

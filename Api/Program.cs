@@ -1,6 +1,6 @@
-using ElegantStringEncoderWebApi.Extensions;
-using ElegantStringEncoderWebApi.Services;
-using ElegantStringEncoderWebApi.SignalR;
+using Api.Extensions;
+using Api.SignalR;
+using Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

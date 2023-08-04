@@ -1,6 +1,6 @@
 using Microsoft.OpenApi.Models;
 
-namespace ElegantStringEncoderWebApi.Extensions;
+namespace Api.Extensions;
 
 public static class ServiceExtensions
 {

@@ -1,4 +1,4 @@
-namespace ElegantStringEncoderWebApi.Services;
+namespace Infrastructure.Services;
 
 public interface IStringEncoder
 {
