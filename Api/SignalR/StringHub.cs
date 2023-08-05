@@ -1,3 +1,4 @@
+using Infrastructure.Abstractions;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.SignalR;
 using SignalRSwaggerGen.Attributes;
@@ -7,21 +8,35 @@ namespace Api.SignalR;
 [SignalRHub]
 public class StringHub : Hub
 {
-    private readonly IStringEncoder _stringEncoder;
+    private readonly IStringEncoderService _stringEncoderService;
     private readonly ILogger<StringHub> _logger;
+    private readonly ISessionOperationService _sessionOperationService;
 
-    public StringHub(IStringEncoder stringEncoder, ILogger<StringHub> logger)
+    public StringHub(IStringEncoderService stringEncoderService, ILogger<StringHub> logger,
+        ISessionOperationService sessionOperationService)
     {
-        _stringEncoder = stringEncoder;
+        _stringEncoderService = stringEncoderService;
         _logger = logger;
+        _sessionOperationService = sessionOperationService;
     }
 
-    public async Task ConvertToBase64String(string input)
+    public async Task ConvertToBase64String(string input, string sessionId)
     {
-        var encodedSymbols = _stringEncoder.GetBase64StringAsync(input);
+        var cancellationToken = new CancellationTokenSource();
+        await _sessionOperationService.AddSession(Guid.Parse(sessionId), cancellationToken);
+
+        var encodedSymbols = _stringEncoderService
+            .GetBase64StringAsync(input, cancellationToken.Token);
+
         await foreach (var symbol in encodedSymbols)
         {
-            await Clients.Caller.SendAsync("ConvertToBase64StringResponse", symbol);
+            if (cancellationToken.IsCancellationRequested)
+            {
+                break;
+            }
+
+            await Clients.Caller.SendAsync("ConvertToBase64StringResponse", symbol,
+                cancellationToken: cancellationToken.Token);
         }
     }
 

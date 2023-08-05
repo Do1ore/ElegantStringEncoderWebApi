@@ -1,3 +1,5 @@
+using Infrastructure.Abstractions;
+using Infrastructure.Services;
 using Microsoft.OpenApi.Models;
 
 namespace Api.Extensions;
@@ -27,5 +29,13 @@ public static class ServiceExtensions
                 }
             });
         });
+    }
+
+    public static void ConfigureCustomServices(this IServiceCollection services)
+    {
+        services.AddTransient<IStringEncoderService, StringEncoderService>();
+        
+        services.AddSingleton<ISessionOperationService, SessionOperationService>();
+        
     }
 }

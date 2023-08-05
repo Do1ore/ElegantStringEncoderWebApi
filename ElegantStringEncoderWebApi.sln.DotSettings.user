@@ -1,0 +1,10 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=fef2b111_002Dc8e0_002D42f8_002Da50b_002Da4f7806319bf/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="GetSessionCancellationToken_ValidSessionId_ReturnsCancellationTokenSource" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::8643B747-6EAF-401B-B155-B05A5B610138::net7.0::Tests.Services.SessionOperationServiceTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::8643B747-6EAF-401B-B155-B05A5B610138::net7.0::Tests.Services.StringEncoderServiceTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::8643B747-6EAF-401B-B155-B05A5B610138::net7.0::Tests.Endpoints.StringEncoderEndpointTests.CancelEncodeRequest_Should_Return_Ok_When_Session_Ends&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::8643B747-6EAF-401B-B155-B05A5B610138::net7.0::Tests.Endpoints.StringEncoderEndpointTests.CancelEncodeRequest_ValidSessionId_ReturnsStatusCode400&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::8643B747-6EAF-401B-B155-B05A5B610138::net7.0::Tests.Endpoints.StringEncoderEndpointTests.CancelEncodeRequest_ValidSessionId_ReturnsStatusCode200&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
