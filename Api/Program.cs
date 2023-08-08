@@ -1,5 +1,6 @@
 using Api.Extensions;
-using Api.SignalR;
+using Application.SignalR;
+
 
 var builder = WebApplication.CreateBuilder(args);
 var conf = builder.Configuration;

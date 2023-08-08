@@ -5,11 +5,11 @@ services:
     image: ${DOCKER_REGISTRY-}elegantstringencoderwebapi:latest
     build:
       context: .
-      dockerfile: ElegantStringEncoderWebApi/Dockerfile
+      dockerfile: Api/Dockerfile
     ports:
      - "7286:80"
     networks:
-     - hypelink
+     - hyperlink
     environment:
      - ASPNETCORE_ENVIRONMENT=Development
      - ASPNETCORE_URLS=https://+:80
@@ -21,8 +21,12 @@ services:
     depends_on:
      - elegantstringencoderwebapi
     networks:
-     - hypelink
+     - hyperlink
+    environment:
+      - BASIC_AUTH_USERNAME=admin
+      - BASIC_AUTH_PASSWORD=admin
+      - PROXY_PASS=http://web/
 
 networks:
-    hypelink:
+    hyperlink:
        driver: bridge

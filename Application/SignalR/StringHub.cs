@@ -1,9 +1,9 @@
 using Infrastructure.Abstractions;
-using Infrastructure.Services;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Logging;
 using SignalRSwaggerGen.Attributes;
 
-namespace Api.SignalR;
+namespace Application.SignalR;
 
 [SignalRHub]
 public class StringHub : Hub
