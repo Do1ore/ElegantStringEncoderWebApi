@@ -6,25 +6,30 @@ using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Services;
 
+/// <summary>
+/// Service to operate long-runnind string encodings
+/// </summary>
 public class StringEncoderService : IStringEncoderService
 {
-    private readonly ISessionOperationService _sessionService;
 
     private readonly int _minOperationDuration;
     private readonly int _maxOperationDuration;
     private readonly ILogger<StringEncoderService> _logger;
 
-    public StringEncoderService(ISessionOperationService sessionService,
-        IConfiguration configuration, ILogger<StringEncoderService> logger)
+    public StringEncoderService(IConfiguration configuration, ILogger<StringEncoderService> logger)
     {
-        _sessionService = sessionService;
         _logger = logger;
         _minOperationDuration = Convert.ToInt32(configuration.GetSection("OperationDuration")["Min"]
                                                 ?? throw new ApplicationException("OperationDuration:min not found."));
         _maxOperationDuration = Convert.ToInt32(configuration.GetSection("OperationDuration")["Max"]
                                                 ?? throw new ApplicationException("OperationDuration:max not found."));
     }
-
+    /// <summary>
+    /// Long-runnting async convertion from string to base64String
+    /// </summary>
+    /// <param name="input"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>IAsyncEnumerable of string </returns>
     public async IAsyncEnumerable<string> GetBase64StringAsync(string input,
         [EnumeratorCancellation] CancellationToken cancellationToken)
     {

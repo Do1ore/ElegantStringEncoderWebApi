@@ -1,0 +1,23 @@
+# This is a generated file. Not intended for manual editing.
+version: "3.4"
+services:
+  elegantstringencoderwebapi:
+    build:
+      context: "C:\\Users\\vladx\\RiderProjects\\ElegantStringEncoderWebApi"
+      dockerfile: "Api/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net7.0/Api.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+      NUGET_PACKAGES: "C:\\Users\\vladx\\.nuget\\packages"
+      NUGET_FALLBACK_PACKAGES: "C:\\Users\\vladx\\.nuget\\packages"
+    image: "elegantstringencoderwebapi:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\vladx\\.nuget\\packages:/root/.nuget/fallbackpackages"
+    - "C:\\Users\\vladx\\RiderProjects\\ElegantStringEncoderWebApi\\Api:/app:rw"
+    - "C:\\Users\\vladx\\RiderProjects\\ElegantStringEncoderWebApi:/src:rw"
+    working_dir: "/app"
