@@ -23,8 +23,6 @@ services:
     networks:
      - hyperlink
     environment:
-      - BASIC_AUTH_USERNAME=admin
-      - BASIC_AUTH_PASSWORD=admin
       - PROXY_PASS=http://web/
 
 networks:
