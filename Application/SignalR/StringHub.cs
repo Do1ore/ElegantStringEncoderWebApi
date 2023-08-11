@@ -11,7 +11,7 @@ public class StringHub : Hub
     private readonly IStringEncoderService _stringEncoderService;
     private readonly ILogger<StringHub> _logger;
     private readonly ISessionOperationService _sessionOperationService;
-
+    private int resultSymbolsCount = 0;
     public StringHub(IStringEncoderService stringEncoderService, ILogger<StringHub> logger,
         ISessionOperationService sessionOperationService)
     {
@@ -27,7 +27,9 @@ public class StringHub : Hub
 
         var encodedSymbols = _stringEncoderService
             .GetBase64StringAsync(input, cancellationToken.Token);
+        resultSymbolsCount = _stringEncoderService.Base64SrtingSymbolsCount(input);
 
+        var index = 1;
         await foreach (var symbol in encodedSymbols)
         {
             if (cancellationToken.IsCancellationRequested)
@@ -37,7 +39,15 @@ public class StringHub : Hub
 
             await Clients.Caller.SendAsync("ConvertToBase64StringResponse", symbol,
                 cancellationToken: cancellationToken.Token);
+            await EncodingProgress(index);
+            index++;
         }
+    }
+
+    private async Task EncodingProgress(int current)
+    {
+        var percent = Math.Round((current / (double)resultSymbolsCount) * 100, 1);
+        await Clients.Caller.SendAsync("EncodingProgressResponse", percent);
     }
 
     public override Task OnConnectedAsync()

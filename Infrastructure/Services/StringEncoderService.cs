@@ -24,6 +24,13 @@ public class StringEncoderService : IStringEncoderService
         _maxOperationDuration = Convert.ToInt32(configuration.GetSection("OperationDuration")["Max"]
                                                 ?? throw new ApplicationException("OperationDuration:max not found."));
     }
+
+    public int Base64SrtingSymbolsCount(string input)
+    {
+        var byteArray = Encoding.UTF8.GetBytes(input);
+        return Convert.ToBase64String(byteArray).Count();
+    }
+
     /// <summary>
     /// Long-runnting async convertion from string to base64String
     /// </summary>
