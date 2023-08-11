@@ -15,7 +15,7 @@ services:
      - ASPNETCORE_URLS=https://+:80
 
   angular-app:
-    image: ${DOCKER_REGISTRY-}angular-app:dev
+    image: ${DOCKER_REGISTRY-}angular-app:latest
     ports:
      - "4200:80"
     depends_on:
