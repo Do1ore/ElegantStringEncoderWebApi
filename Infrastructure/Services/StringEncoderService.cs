@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 namespace Infrastructure.Services;
 
 /// <summary>
-/// Service to operate long-runnind string encodings
+/// Service to operate long-running string encodings
 /// </summary>
 public class StringEncoderService : IStringEncoderService
 {
@@ -25,14 +25,14 @@ public class StringEncoderService : IStringEncoderService
                                                 ?? throw new ApplicationException("OperationDuration:max not found."));
     }
 
-    public int Base64SrtingSymbolsCount(string input)
+    public int Base64StringSymbolsCount(string input)
     {
         var byteArray = Encoding.UTF8.GetBytes(input);
         return Convert.ToBase64String(byteArray).Count();
     }
 
     /// <summary>
-    /// Long-runnting async convertion from string to base64String
+    /// Long-running async conversion from string to base64String
     /// </summary>
     /// <param name="input"></param>
     /// <param name="cancellationToken"></param>

@@ -9,7 +9,7 @@ services:
     command: []
     entrypoint:
     - "dotnet"
-    - "/app/bin/Debug/net7.0/Api.dll"
+    - "/app/bin/Release/net7.0/Api.dll"
     environment:
       DOTNET_USE_POLLING_FILE_WATCHER: "true"
       NUGET_PACKAGES: "C:\\Users\\vladx\\.nuget\\packages"

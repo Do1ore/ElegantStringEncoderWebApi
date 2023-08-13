@@ -27,7 +27,7 @@ public class StringHub : Hub
 
         var encodedSymbols = _stringEncoderService
             .GetBase64StringAsync(input, cancellationToken.Token);
-        resultSymbolsCount = _stringEncoderService.Base64SrtingSymbolsCount(input);
+        resultSymbolsCount = _stringEncoderService.Base64StringSymbolsCount(input);
 
         var index = 1;
         await foreach (var symbol in encodedSymbols)

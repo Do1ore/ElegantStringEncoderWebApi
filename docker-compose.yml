@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   elegantstringencoderwebapi:
-    image: ${DOCKER_REGISTRY-}elegantstringencoderwebapi:dev
+    image: ${DOCKER_REGISTRY-}elegantstringencoderwebapi:1.0.0
     build:
       context: .
       dockerfile: Api/Dockerfile
@@ -15,7 +15,7 @@ services:
      - ASPNETCORE_URLS=https://+:80
 
   angular-app:
-    image: ${DOCKER_REGISTRY-}angular-app:latest
+    image: ${DOCKER_REGISTRY-}angular-app:1.0.1
     ports:
      - "4200:80"
     depends_on:
