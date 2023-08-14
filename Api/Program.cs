@@ -1,15 +1,13 @@
 using Api.Extensions;
 using Application.SignalR;
 
-
 var builder = WebApplication.CreateBuilder(args);
-var conf = builder.Configuration;
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddAndConfigureSwaggerGen();
 builder.Services.ConfigureCustomServices();
-    
+
 builder.Services.AddSignalR();
 
 builder.Services.ConfigureCorsPolicy();
@@ -23,7 +21,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-//Minimal api registration
+//Minimal api registry
 app.RegisterEndpointDefinitions();
 
 app.UseAuthorization();

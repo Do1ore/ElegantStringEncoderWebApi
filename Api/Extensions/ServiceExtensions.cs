@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using Infrastructure.Abstractions;
 using Infrastructure.Services;
 using Microsoft.OpenApi.Models;
@@ -34,8 +35,9 @@ public static class ServiceExtensions
     public static void ConfigureCustomServices(this IServiceCollection services)
     {
         services.AddTransient<IStringEncoderService, StringEncoderService>();
-        
+
         services.AddSingleton<ISessionOperationService, SessionOperationService>();
-        
+
+        services.AddSingleton(new ConcurrentDictionary<Guid, CancellationTokenSource>());
     }
 }

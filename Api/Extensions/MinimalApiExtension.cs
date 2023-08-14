@@ -9,7 +9,7 @@ public static class MinimalApiExtension
         var endpointDefinitions = typeof(Program).Assembly
             .GetTypes()
             .Where(t => t.IsAssignableTo(typeof(IEndpointDefinition))
-                        && !t.IsAbstract && !t.IsInterface)
+                        && t is { IsAbstract: false, IsInterface: false })
             .Select(Activator.CreateInstance)
             .Cast<IEndpointDefinition>();
 

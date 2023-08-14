@@ -11,7 +11,7 @@ public class StringEncoderServiceTests
     public async Task GetBase64StringAsync_ValidInput_EncodesString()
     {
         // Arrange
-        var input = "Hello, World!";
+        const string input = "Hello, World!";
         var encodedString = Convert.ToBase64String(Encoding.UTF8.GetBytes(input));
 
         var configuration = Substitute.For<IConfiguration>();
@@ -38,7 +38,7 @@ public class StringEncoderServiceTests
     public async Task GetBase64StringAsync_CancelledOperation_LogsCancellationInfo()
     {
         // Arrange
-        var input = "Hello, World!";
+        string input = "Hello, World!";
 
         var configuration = Substitute.For<IConfiguration>();
         configuration.GetSection("OperationDuration")["Min"].Returns("500");

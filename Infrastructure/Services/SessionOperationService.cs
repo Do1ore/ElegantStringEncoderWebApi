@@ -9,24 +9,13 @@ namespace Infrastructure.Services;
 /// </summary>
 public class SessionOperationService : ISessionOperationService
 {
-    private readonly ConcurrentDictionary<Guid, CancellationTokenSource> _sessions = new();
+    private readonly ConcurrentDictionary<Guid, CancellationTokenSource> _sessions;
 
-    /// <summary>
-    /// Get cancellation token from ConcurrentDictionary by id
-    /// </summary>
-    /// <param name="sessionId"></param>
-    /// <returns>CancellationTokenSource</returns>
-    /// <exception cref="ArgumentException"></exception>
-    public Task<CancellationTokenSource> GetSessionCancellationToken(Guid sessionId)
+    public SessionOperationService(ConcurrentDictionary<Guid, CancellationTokenSource> sessions)
     {
-        if (_sessions.TryGetValue(sessionId, out var cancellationTokenSource))
-        {
-            return Task.FromResult(cancellationTokenSource);
-        }
-
-        throw new ArgumentException("Session with this id not found");
+        _sessions = sessions;
     }
-
+    
     /// <summary>
     /// Add session to ConcurrentDictionary by id
     /// </summary>
@@ -35,12 +24,7 @@ public class SessionOperationService : ISessionOperationService
     /// <returns>Task of bool</returns>
     public Task<bool> AddSession(Guid sessionId, CancellationTokenSource cancellationTokenSource)
     {
-        if (_sessions.TryAdd(sessionId, cancellationTokenSource))
-        {
-            return Task.FromResult(true);
-        }
-
-        return Task.FromResult(false);
+        return Task.FromResult(_sessions.TryAdd(sessionId, cancellationTokenSource));
     }
 
     /// <summary>
@@ -50,12 +34,10 @@ public class SessionOperationService : ISessionOperationService
     /// <returns>Task of bool</returns>
     public Task<bool> EndOperationSession(Guid sessionId)
     {
-        if (_sessions.TryRemove(sessionId, out var cancellationTokenSource))
-        {
-            cancellationTokenSource.Cancel();
-            return Task.FromResult(true);
-        }
+        if (!_sessions.TryRemove(sessionId, out var cancellationTokenSource))
+            return Task.FromResult(false);
 
-        return Task.FromResult(false);
+        cancellationTokenSource.Cancel();
+        return Task.FromResult(true);
     }
 }

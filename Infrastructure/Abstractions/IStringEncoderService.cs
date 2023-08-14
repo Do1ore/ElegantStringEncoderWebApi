@@ -2,7 +2,7 @@ namespace Infrastructure.Abstractions;
 
 
 /// <summary>
-/// Service to operate long-runnind string encodings
+/// Service to operate long-running string encodings
 /// </summary>
 public interface IStringEncoderService
 {

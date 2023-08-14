@@ -28,7 +28,7 @@ public class StringEncoderService : IStringEncoderService
     public int Base64StringSymbolsCount(string input)
     {
         var byteArray = Encoding.UTF8.GetBytes(input);
-        return Convert.ToBase64String(byteArray).Count();
+        return Convert.ToBase64String(byteArray).Length;
     }
 
     /// <summary>

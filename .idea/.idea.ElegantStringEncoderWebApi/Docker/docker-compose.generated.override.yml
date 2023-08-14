@@ -8,16 +8,28 @@ services:
       target: "base"
     command: []
     entrypoint:
-    - "dotnet"
-    - "/app/bin/Release/net7.0/Api.dll"
+    - "/riderDebugger/linux-x64/dotnet/dotnet"
+    - "/riderDebugger/JetBrains.Debugger.Worker.exe"
+    - "--mode=server"
+    - "--frontend-port=57100"
+    - "--backend-port=57300"
     environment:
       DOTNET_USE_POLLING_FILE_WATCHER: "true"
       NUGET_PACKAGES: "C:\\Users\\vladx\\.nuget\\packages"
       NUGET_FALLBACK_PACKAGES: "C:\\Users\\vladx\\.nuget\\packages"
+      RIDER_DEBUGGER_LOG_DIR: "/riderLogs"
+      RESHARPER_LOG_CONF: "/riderLogsConf/backend-log.xml"
     image: "elegantstringencoderwebapi:dev"
-    ports: []
+    ports:
+    - "127.0.0.1:57000:57100"
+    - "127.0.0.1:57200:57300"
     volumes:
     - "C:\\Users\\vladx\\.nuget\\packages:/root/.nuget/fallbackpackages"
     - "C:\\Users\\vladx\\RiderProjects\\ElegantStringEncoderWebApi\\Api:/app:rw"
     - "C:\\Users\\vladx\\RiderProjects\\ElegantStringEncoderWebApi:/src:rw"
+    - "C:\\Users\\vladx\\AppData\\Local\\JetBrains\\RiderRemoteDebugger\\2023.2\\\
+      Linux64:/riderDebugger"
+    - "C:\\Program Files\\JetBrains\\JetBrains Rider 2023.1.2/bin:/riderLogsConf"
+    - "C:\\Users\\vladx\\AppData\\Local\\JetBrains\\Rider2023.2\\log\\DebuggerWorker\\\
+      JetBrains.Debugger.Worker.2023_8_15_00_40_46:/riderLogs:rw"
     working_dir: "/app"

@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using Infrastructure.Services;
 
 
@@ -6,46 +7,13 @@ namespace Tests.Services;
 public class SessionOperationServiceTests
 {
     [Fact]
-    public async Task GetSessionCancellationToken_ValidSessionId_ReturnsCancellationTokenSource()
-    {
-        // Arrange
-        var sessionId = Guid.NewGuid();
-        var cancellationTokenSource = new CancellationTokenSource();
-
-        var sessionService = new SessionOperationService();
-        await sessionService.AddSession(sessionId, cancellationTokenSource);
-
-        // Act
-        var result = await sessionService.GetSessionCancellationToken(sessionId);
-
-        // Assert
-        Assert.Equal(cancellationTokenSource, result);
-    }
-
-    [Fact]
-    public async Task GetSessionCancellationToken_InvalidSessionId_ThrowsArgumentException()
-    {
-        // Arrange
-        var sessionId = Guid.NewGuid();
-        var invalidSessionId = Guid.NewGuid();
-
-        var cancellationTokenSource = new CancellationTokenSource();
-
-        var sessionService = new SessionOperationService();
-        await sessionService.AddSession(sessionId, cancellationTokenSource);
-
-        // Act & Assert
-        await Assert.ThrowsAsync<ArgumentException>(() => sessionService.GetSessionCancellationToken(invalidSessionId));
-    }
-
-    [Fact]
     public async Task AddSession_NewSession_ReturnsTrue()
     {
         // Arrange
         var sessionId = Guid.NewGuid();
         var cancellationTokenSource = new CancellationTokenSource();
 
-        var sessionService = new SessionOperationService();
+        var sessionService = new SessionOperationService(new ConcurrentDictionary<Guid, CancellationTokenSource>());
 
         // Act
         var result = await sessionService.AddSession(sessionId, cancellationTokenSource);
@@ -61,7 +29,7 @@ public class SessionOperationServiceTests
         var sessionId = Guid.NewGuid();
         var cancellationTokenSource = new CancellationTokenSource();
 
-        var sessionService = new SessionOperationService();
+        var sessionService = new SessionOperationService(new ConcurrentDictionary<Guid, CancellationTokenSource>());
         await sessionService.AddSession(sessionId, cancellationTokenSource);
 
         // Act
@@ -78,8 +46,8 @@ public class SessionOperationServiceTests
         var sessionId = Guid.NewGuid();
         var cancellationTokenSource = Substitute.For<CancellationTokenSource>();
 
-        var sessionService = new SessionOperationService();
-        await sessionService.AddSession(sessionId, cancellationTokenSource); 
+        var sessionService = new SessionOperationService(new ConcurrentDictionary<Guid, CancellationTokenSource>());
+        await sessionService.AddSession(sessionId, cancellationTokenSource);
 
         // Act
         var result = await sessionService.EndOperationSession(sessionId);
@@ -97,7 +65,7 @@ public class SessionOperationServiceTests
         var invalidSessionId = Guid.NewGuid();
         var cancellationTokenSource = new CancellationTokenSource();
 
-        var sessionService = new SessionOperationService();
+        var sessionService = new SessionOperationService(new ConcurrentDictionary<Guid, CancellationTokenSource>());
         await sessionService.AddSession(sessionId, cancellationTokenSource);
 
         // Act
@@ -107,4 +75,3 @@ public class SessionOperationServiceTests
         Assert.False(result);
     }
 }
-
